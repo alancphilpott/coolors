@@ -21,13 +21,12 @@ svg {
 }
 
 .colors {
-    min-height: 80vh;
+    min-height: 70vh;
     display: flex;
-    /* color: rgb(240, 240, 240); */
 }
 
 .color {
-    height: 80vh;
+    height: 75vh;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -35,9 +34,6 @@ svg {
     justify-content: space-evenly;
     position: relative;
     overflow: hidden;
-
-    background: orange;
-    border: 1px solid black;
 }
 
 .color h2 {
@@ -99,7 +95,7 @@ svg {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    height: 20vh;
+    height: 25vh;
 }
 
 .panel button {
