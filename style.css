@@ -1,8 +1,126 @@
 * {
-    margin: 0em;
-    padding: 0em;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
+    font-family: "Nunito", sans-serif;
+    color: rgb(50, 50, 50);
+}
+
+button {
     font-family: "Quicksand", sans-serif;
+}
+
+path,
+i,
+svg {
+    /* these are never clicked */
+    pointer-events: none;
+}
+
+.colors {
+    min-height: 80vh;
+    display: flex;
+    /* color: rgb(240, 240, 240); */
+}
+
+.color {
+    height: 80vh;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    overflow: hidden;
+
+    background: orange;
+    border: 1px solid black;
+}
+
+.color h2 {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.adjust,
+.lock {
+    font-size: 2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 2rem 0rem;
+}
+
+.sliders {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    padding: 1rem;
+    width: 80%;
+    pointer-events: none;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    background: rgb(255, 255, 255);
+
+    /* create an adjustment class */
+    transform: translateY(100px);
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.sliders button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.3rem 0.5rem;
+    border: none;
+    background: black;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sliders.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 20vh;
+}
+
+.panel button {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    margin: 1rem;
+    background: rgb(36, 20, 20);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 1rem;
+}
+
+.panel p {
+    font-size: 1.2rem;
+}
+
+.library-panel,
+.generate-panel,
+.save-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
