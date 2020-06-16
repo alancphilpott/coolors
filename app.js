@@ -6,6 +6,11 @@ const currentHexes = document.querySelectorAll(".color h2");
 
 let initialColors;
 
+// Event Listeners
+allSliders.forEach((slider) => {
+    slider.addEventListener("input", hslControls);
+});
+
 // Functions
 function generateHex() {
     return chroma.random();
@@ -55,6 +60,29 @@ function colorizeSliders(color, hue, brightness, saturation) {
     saturation.style.backgroundImage = `linear-gradient(to right, ${scaleSat(0)}, ${scaleSat(1)})`;
 }
 
-generateRandomColors();
+function hslControls(e) {
+    const sliderIndex =
+        e.target.getAttribute("data-hue") ||
+        e.target.getAttribute("data-bright") ||
+        e.target.getAttribute("data-sat");
 
-// Event Listeners
+    const colorSliders = e.target.parentElement.querySelectorAll(
+        "input[type='range']"
+    );
+
+    const hue = colorSliders[0],
+        brightness = colorSliders[1],
+        saturation = colorSliders[2];
+
+    const currentColor = colors[sliderIndex].querySelector("h2").innerText;
+
+    let color = chroma(currentColor)
+        .set("hsl.h", hue.value)
+        .set("hsl.l", brightness.value)
+        .set("hsl.s", saturation.value);
+
+    colors[sliderIndex].style.backgroundColor = color;
+    currentColor = color;
+}
+
+generateRandomColors();
