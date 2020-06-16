@@ -1,3 +1,4 @@
+/* Global */
 * {
     margin: 0;
     padding: 0;
@@ -20,6 +21,8 @@ svg {
     pointer-events: none;
 }
 
+/* Colors */
+
 .colors {
     min-height: 70vh;
     display: flex;
@@ -41,6 +44,13 @@ svg {
     cursor: pointer;
 }
 
+/* Color Controls */
+
+.controls {
+    display: flex;
+    flex-direction: column;
+}
+
 .adjust,
 .lock {
     font-size: 2rem;
@@ -50,6 +60,8 @@ svg {
     margin: 2rem 0rem;
 }
 
+/* Sliders */
+
 .sliders {
     display: flex;
     flex-direction: column;
@@ -57,15 +69,15 @@ svg {
     bottom: 0;
     padding: 1rem;
     width: 80%;
-    pointer-events: none;
+    /* pointer-events: none; */
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     background: rgb(255, 255, 255);
 
     /* create an adjustment class */
-    transform: translateY(100px);
+    /* transform: translateY(100px); */
     transition: all 0.5s ease-in-out;
-    opacity: 0;
+    /* opacity: 0; */
 }
 
 .sliders button {
@@ -86,10 +98,16 @@ svg {
     pointer-events: all;
 }
 
-.controls {
-    display: flex;
-    flex-direction: column;
+input[type="range"] {
+    -webkit-appearance: none;
+    margin: 1rem 0;
+    width: 100%;
+    position: relative;
+    border-radius: 1rem;
+    cursor: pointer;
 }
+
+/* Panels */
 
 .panel {
     display: flex;
