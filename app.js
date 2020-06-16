@@ -13,14 +13,19 @@ function generateHex() {
 
 function generateRandomColors() {
     colors.forEach((div, index) => {
-        console.log(div);
-
         const hexText = div.children[0];
         const randomHex = generateHex();
 
         div.style.backgroundColor = randomHex;
         hexText.innerText = randomHex;
+
+        checkContrast(randomHex, hexText);
     });
+}
+
+function checkContrast(color, text) {
+    const lume = chroma(color).luminance();
+    lume > 0.5 ? (text.style.color = "black") : (text.style.color = "white");
 }
 
 generateRandomColors();
