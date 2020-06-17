@@ -3,6 +3,7 @@ const colors = document.querySelectorAll(".color");
 const generateBtn = document.querySelector(".generate");
 const allSliders = document.querySelectorAll("input[type='range']");
 const currentHexes = document.querySelectorAll(".color h2");
+const popup = document.querySelector(".copy-container");
 
 let initialColors;
 
@@ -15,6 +16,17 @@ colors.forEach((color, index) => {
     color.addEventListener("change", () => {
         updateColorHexOnChange(index);
     });
+});
+
+currentHexes.forEach((hex) => {
+    hex.addEventListener("click", () => {
+        copyToClipboard(hex);
+    });
+});
+
+popup.addEventListener("transitionend", () => {
+    popup.classList.remove("active");
+    popup.children[0].classList.remove("active");
 });
 
 // Functions
@@ -127,6 +139,20 @@ function resetSliders() {
                 break;
         }
     });
+}
+
+function copyToClipboard(hex) {
+    const textAreaHack = document.createElement("textarea");
+    textAreaHack.value = hex.innerText;
+    document.body.appendChild(textAreaHack);
+    textAreaHack.select();
+    document.execCommand("copy");
+    document.body.removeChild(textAreaHack);
+
+    const popupBox = popup.children[0];
+
+    popup.classList.add("active");
+    popupBox.classList.add("active");
 }
 
 generateRandomColors();
