@@ -71,8 +71,9 @@ svg {
     width: 90%;
     /* pointer-events: none; */
     border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    background: rgb(255, 255, 255);
+    border-top-right-radius: 2rem;
+    background: rgb(224, 224, 224);
+    font-size: 1.2em;
 
     /* create an adjustment class */
     /* transform: translateY(100px); */
@@ -84,12 +85,14 @@ svg {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 0.3rem 0.5rem;
+    padding: 0.5rem 0.7rem;
     border: none;
-    background: black;
+    background: #0f0b00;
     color: white;
     cursor: pointer;
     font-weight: bold;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
 }
 
 .sliders.active {
@@ -121,7 +124,7 @@ input[type="range"] {
     padding: 1rem 2rem;
     margin: 1rem;
     /* background: rgb(36, 20, 20); */
-    background: #d9a62b;
+    background: #0f0b00;
     color: white;
     border: none;
     cursor: pointer;
