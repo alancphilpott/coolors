@@ -69,16 +69,16 @@ svg {
     bottom: 0;
     padding: 1rem;
     width: 90%;
-    /* pointer-events: none; */
+    pointer-events: none;
     border-top-left-radius: 1rem;
     border-top-right-radius: 2rem;
     background: rgb(224, 224, 224);
     font-size: 1.2em;
 
     /* create an adjustment class */
-    /* transform: translateY(100px); */
+    transform: translateY(100px);
     transition: all 0.5s ease-in-out;
-    /* opacity: 0; */
+    opacity: 0;
 }
 
 .sliders button {
@@ -155,6 +155,7 @@ input[type="range"] {
     align-items: center;
     opacity: 0;
     pointer-events: none;
+    transition: transform 0.5s ease-in-out;
 }
 
 .copy-container.active {
