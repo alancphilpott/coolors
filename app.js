@@ -45,8 +45,7 @@ function generateRandomColors() {
 
         colorizeSliders(randomColor, hue, brightness, saturation);
     });
-
-    console.log(initialColors);
+    resetSliders();
 }
 
 function checkContrast(color, text) {
@@ -74,8 +73,8 @@ function colorizeSliders(color, hue, brightness, saturation) {
 function hslControls(e) {
     const sliderIndex =
         e.target.getAttribute("data-hue") ||
-        e.target.getAttribute("data-bright") ||
-        e.target.getAttribute("data-sat");
+        e.target.getAttribute("data-brightness") ||
+        e.target.getAttribute("data-saturation");
 
     const colorSliders = e.target.parentElement.querySelectorAll(
         "input[type='range']"
@@ -93,6 +92,8 @@ function hslControls(e) {
         .set("hsl.s", saturation.value);
 
     colors[sliderIndex].style.backgroundColor = color;
+
+    colorizeSliders(color, hue, brightness, saturation);
 }
 
 function updateColorHexOnChange(index) {
@@ -105,6 +106,27 @@ function updateColorHexOnChange(index) {
 
     checkContrast(color, hexText);
     for (icon of icons) checkContrast(color, icon);
+}
+
+function resetSliders() {
+    allSliders.forEach((slider) => {
+        const color = initialColors[slider.getAttribute(`data-${slider.name}`)],
+            hueValue = chroma(color).hsl()[0].toFixed(2),
+            saturationValue = chroma(color).hsl()[1].toFixed(2),
+            brightnessValue = chroma(color).hsl()[2].toFixed(2);
+
+        switch (slider.name) {
+            case "hue":
+                slider.value = hueValue;
+                break;
+            case "brightness":
+                slider.value = brightnessValue;
+                break;
+            case "saturation":
+                slider.value = saturationValue;
+                break;
+        }
+    });
 }
 
 generateRandomColors();

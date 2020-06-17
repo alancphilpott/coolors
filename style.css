@@ -120,7 +120,8 @@ input[type="range"] {
     font-size: 1.2rem;
     padding: 1rem 2rem;
     margin: 1rem;
-    background: rgb(36, 20, 20);
+    /* background: rgb(36, 20, 20); */
+    background: #d9a62b;
     color: white;
     border: none;
     cursor: pointer;
