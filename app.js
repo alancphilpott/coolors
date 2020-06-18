@@ -16,7 +16,10 @@ const controls = document.querySelectorAll(".controls button");
 let initialColors;
 
 // Event Listeners
-window.onload = generateRandomColors();
+window.onload = () => {
+    genPalettesFromLocal();
+    generateRandomColors();
+};
 
 allSliders.forEach((slider) => {
     slider.addEventListener("input", hslControls);
@@ -223,7 +226,7 @@ const saveNameInput = document.querySelector(".save-container input");
 const libraryBtn = document.querySelector(".library");
 const closeLibraryBtn = document.querySelector(".close-library");
 const libraryContainer = document.querySelector(".library-container");
-const savedPalettes = [];
+let savedPalettes = [];
 
 // Event Listeners
 saveBtn.addEventListener("click", openSavePalette);
@@ -269,6 +272,16 @@ function savePaletteToLocal(paletteObj) {
     let localPalettes = checkExistingStorage();
     localPalettes.push(paletteObj);
     localStorage.setItem("palettes", JSON.stringify(localPalettes));
+}
+
+function genPalettesFromLocal() {
+    savedPalettes = [];
+
+    let localPalettes = checkExistingStorage();
+    localPalettes.forEach((paletteObj) => {
+        addPaletteToLibrary(paletteObj);
+        savedPalettes.push(paletteObj);
+    });
 }
 
 function addPaletteToLibrary(paletteObj) {
@@ -321,6 +334,7 @@ function genLibraryPalette(e) {
         checkContrast(initialColors[index], btn);
         checkContrast(initialColors[index], lockBtns[index]);
     });
+    updateSliders();
 }
 
 function openLibrary() {
