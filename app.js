@@ -226,7 +226,6 @@ const saveNameInput = document.querySelector(".save-container input");
 const libraryBtn = document.querySelector(".library");
 const closeLibraryBtn = document.querySelector(".close-library");
 const libraryContainer = document.querySelector(".library-container");
-let savedPalettes = [];
 
 // Event Listeners
 saveBtn.addEventListener("click", openSavePalette);
@@ -260,9 +259,9 @@ function savePalette() {
         palette.push(hex.innerText);
     });
 
-    let paletteNum = savedPalettes.length;
+    const localPalettes = checkExistingStorage();
+    let paletteNum = localPalettes.length;
     let paletteObj = { name, palette, paletteNum };
-    savedPalettes.push(paletteObj);
 
     savePaletteToLocal(paletteObj);
     addPaletteToLibrary(paletteObj);
@@ -275,12 +274,9 @@ function savePaletteToLocal(paletteObj) {
 }
 
 function genPalettesFromLocal() {
-    savedPalettes = [];
-
     let localPalettes = checkExistingStorage();
     localPalettes.forEach((paletteObj) => {
         addPaletteToLibrary(paletteObj);
-        savedPalettes.push(paletteObj);
     });
 }
 
@@ -317,10 +313,12 @@ function addPaletteToLibrary(paletteObj) {
 function genLibraryPalette(e) {
     closeLibrary();
 
+    const localPalettes = checkExistingStorage();
+
     const chosenPaletteIndex = e.target.classList[1];
 
     initialColors = [];
-    savedPalettes[chosenPaletteIndex].palette.forEach((color, index) => {
+    localPalettes[chosenPaletteIndex].palette.forEach((color, index) => {
         initialColors.push(color);
         colors[index].style.backgroundColor = color;
 
@@ -328,6 +326,13 @@ function genLibraryPalette(e) {
         hexText.innerText = chroma(color).hex();
 
         checkContrast(color, hexText);
+
+        const colorSliders = colors[index].querySelectorAll(".sliders input");
+        const hue = colorSliders[0],
+            brightness = colorSliders[1],
+            saturation = colorSliders[2];
+
+        colorizeSliders(chroma(color), hue, brightness, saturation);
     });
 
     adjustBtns.forEach((btn, index) => {
