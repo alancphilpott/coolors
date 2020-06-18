@@ -109,7 +109,6 @@ input[type="range"] {
     font-size: 1.2rem;
     padding: 1rem 2rem;
     margin: 1rem;
-    /* background: rgb(36, 20, 20); */
     background: #02010f;
     color: white;
     border: none;
@@ -180,8 +179,8 @@ input[type="range"] {
     font-size: 2rem;
 }
 
-.close-save,
-.close-adjustment {
+.close-adjustment,
+.close-save {
     position: absolute;
     top: 0;
     right: 0;
@@ -199,4 +198,58 @@ input[type="range"] {
     font-size: 1.5rem;
     padding: 0.75rem;
     width: 90%;
+}
+
+.library-popup {
+    min-width: 60%;
+    padding: 1rem;
+    justify-content: flex-start;
+    overflow: auto;
+    max-height: 50vh;
+}
+
+.close-library {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 0.7rem;
+    border: none;
+    background: #02010f;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border-bottom-left-radius: 1rem;
+}
+
+.custom-palette {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 2rem;
+}
+
+.custom-palette h4 {
+    flex: 0.5;
+}
+
+.small-preview {
+    display: flex;
+    flex: 1;
+}
+
+.small-preview div {
+    height: 4rem;
+    flex: 1;
+}
+
+.pick-palette {
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin: 1rem;
+    background: #02010f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 1rem;
 }

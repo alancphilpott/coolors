@@ -220,10 +220,18 @@ const submitSave = document.querySelector(".submit-save");
 const closeSaveBtn = document.querySelector(".close-save");
 const saveContainer = document.querySelector(".save-container");
 const saveNameInput = document.querySelector(".save-container input");
+const libraryBtn = document.querySelector(".library");
+const closeLibraryBtn = document.querySelector(".close-library");
+const libraryContainer = document.querySelector(".library-container");
+const savedPalettes = [];
 
 // Event Listeners
 saveBtn.addEventListener("click", openSavePalette);
 closeSaveBtn.addEventListener("click", closeSavePalette);
+submitSave.addEventListener("click", savePalette);
+
+libraryBtn.addEventListener("click", openLibrary);
+closeLibraryBtn.addEventListener("click", closeLibrary);
 
 // Functions
 function openSavePalette() {
@@ -235,5 +243,74 @@ function openSavePalette() {
 function closeSavePalette() {
     const popup = saveContainer.children[0];
     saveContainer.classList.remove("active");
+    popup.classList.remove("active");
+}
+
+function savePalette() {
+    closeSavePalette();
+
+    const name = saveNameInput.value;
+    saveNameInput.value = "";
+
+    const palette = [];
+    currentHexes.forEach((hex) => {
+        palette.push(hex.innerText);
+    });
+
+    let paletteNum = savedPalettes.length;
+    let paletteObj = { name, palette, paletteNum };
+    savedPalettes.push(paletteObj);
+
+    savePaletteToLocal(paletteObj);
+    addPaletteToLibrary(paletteObj);
+}
+
+function savePaletteToLocal(paletteObj) {
+    let localPalettes = checkExistingStorage();
+    localPalettes.push(paletteObj);
+    localStorage.setItem("palettes", JSON.stringify(localPalettes));
+}
+
+function checkExistingStorage() {
+    const palettes = localStorage.getItem("palettes");
+    return palettes ? JSON.parse(palettes) : [];
+}
+
+function addPaletteToLibrary(paletteObj) {
+    const palette = document.createElement("div");
+    palette.classList.add("custom-palette");
+
+    const title = document.createElement("h4");
+    title.innerText = paletteObj.name;
+
+    const preview = document.createElement("div");
+    preview.classList.add("small-preview");
+    paletteObj.palette.forEach((color) => {
+        const previewColor = document.createElement("div");
+        previewColor.style.backgroundColor = color;
+        preview.appendChild(previewColor);
+    });
+
+    const paletteBtn = document.createElement("button");
+    paletteBtn.classList.add("pick-palette");
+    paletteBtn.classList.add(paletteObj.paletteNum);
+    paletteBtn.innerText = "Select";
+
+    palette.appendChild(title);
+    palette.appendChild(preview);
+    palette.appendChild(paletteBtn);
+
+    libraryContainer.children[0].appendChild(palette);
+}
+
+function openLibrary() {
+    const popup = libraryContainer.children[0];
+    libraryContainer.classList.add("active");
+    popup.classList.add("active");
+}
+
+function closeLibrary() {
+    const popup = libraryContainer.children[0];
+    libraryContainer.classList.remove("active");
     popup.classList.remove("active");
 }
