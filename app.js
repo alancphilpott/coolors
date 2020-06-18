@@ -1,3 +1,7 @@
+/* 
+    Colors Section - JS functionality for the colors section.
+*/
+
 // Global Selections
 const colors = document.querySelectorAll(".color");
 const generateBtn = document.querySelector(".generate");
@@ -12,6 +16,8 @@ const controls = document.querySelectorAll(".controls button");
 let initialColors;
 
 // Event Listeners
+window.onload = generateRandomColors();
+
 allSliders.forEach((slider) => {
     slider.addEventListener("input", hslControls);
 });
@@ -52,8 +58,6 @@ lockBtns.forEach((btn, index) => {
         lockColor(index);
     });
 });
-
-window.onload = generateRandomColors();
 
 // Functions
 function generateHex() {
@@ -204,4 +208,32 @@ function lockColor(index) {
     colors[index].classList.toggle("locked");
     lockBtns[index].children[0].classList.toggle("fa-lock-open");
     lockBtns[index].children[0].classList.toggle("fa-lock");
+}
+
+/* 
+    Panels Section - JS functionality for the panels section.
+*/
+
+// Global Selections
+const saveBtn = document.querySelector(".save");
+const submitSave = document.querySelector(".submit-save");
+const closeSaveBtn = document.querySelector(".close-save");
+const saveContainer = document.querySelector(".save-container");
+const saveNameInput = document.querySelector(".save-container input");
+
+// Event Listeners
+saveBtn.addEventListener("click", openSavePalette);
+closeSaveBtn.addEventListener("click", closeSavePalette);
+
+// Functions
+function openSavePalette() {
+    const popup = saveContainer.children[0];
+    saveContainer.classList.add("active");
+    popup.classList.add("active");
+}
+
+function closeSavePalette() {
+    const popup = saveContainer.children[0];
+    saveContainer.classList.remove("active");
+    popup.classList.remove("active");
 }

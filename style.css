@@ -22,7 +22,6 @@ svg {
 }
 
 /* Colors */
-
 .colors {
     min-height: 70vh;
     display: flex;
@@ -81,20 +80,6 @@ svg {
     opacity: 0;
 }
 
-.sliders button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0.5rem 0.7rem;
-    border: none;
-    background: #0f0b00;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    border-top-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-}
-
 .sliders.active {
     opacity: 1;
     transform: translateY(0);
@@ -119,12 +104,13 @@ input[type="range"] {
     height: 25vh;
 }
 
-.panel button {
+.panel button,
+.submit-save {
     font-size: 1.2rem;
     padding: 1rem 2rem;
     margin: 1rem;
     /* background: rgb(36, 20, 20); */
-    background: #0f0b00;
+    background: #02010f;
     color: white;
     border: none;
     cursor: pointer;
@@ -143,7 +129,9 @@ input[type="range"] {
     align-items: center;
 }
 
-.copy-container {
+.copy-container,
+.save-container,
+.library-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -158,12 +146,16 @@ input[type="range"] {
     transition: transform 0.5s ease-in-out;
 }
 
-.copy-container.active {
+.copy-container.active,
+.save-container.active,
+.library-container.active {
     opacity: 1;
     pointer-events: all;
 }
 
-.copy-popup {
+.copy-popup,
+.save-popup,
+.library-popup {
     background: white;
     display: flex;
     flex-direction: column;
@@ -172,14 +164,39 @@ input[type="range"] {
     border-radius: 2rem;
     transition: transform 0.5s ease;
     transform: translateY(0rem);
-    min-width: 25%;
-    min-height: 20vh;
+    min-width: 40%;
+    min-height: 30vh;
 }
 
-.copy-popup.active {
+.copy-popup.active,
+.save-popup.active,
+.library-popup.active {
     transform: translateY(-4rem);
 }
 
-.copy-popup h4 {
+.copy-popup h4,
+.save-popup h4,
+.library-popup h4 {
     font-size: 2rem;
+}
+
+.close-save,
+.close-adjustment {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 0.7rem;
+    border: none;
+    background: #02010f;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.save-name {
+    font-size: 1.5rem;
+    padding: 0.75rem;
+    width: 90%;
 }
