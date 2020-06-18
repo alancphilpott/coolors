@@ -5,9 +5,10 @@ const allSliders = document.querySelectorAll("input[type='range']");
 const currentHexes = document.querySelectorAll(".color h2");
 const popup = document.querySelector(".copy-container");
 const adjustBtns = document.querySelectorAll(".adjust");
+const lockBtns = document.querySelectorAll(".lock");
 const sliderContainers = document.querySelectorAll(".sliders");
 const adjustCloseBtns = document.querySelectorAll(".close-adjustment");
-
+const controls = document.querySelectorAll(".controls button");
 let initialColors;
 
 // Event Listeners
@@ -44,6 +45,10 @@ adjustCloseBtns.forEach((btn, index) => {
     });
 });
 
+generateBtn.addEventListener("click", generateRandomColors);
+
+window.onload = generateRandomColors();
+
 // Functions
 function generateHex() {
     return chroma.random();
@@ -72,7 +77,12 @@ function generateRandomColors() {
 
         colorizeSliders(randomColor, hue, brightness, saturation);
     });
-    resetSliders();
+    updateSliders();
+
+    adjustBtns.forEach((btn, index) => {
+        checkContrast(initialColors[index], btn);
+        checkContrast(initialColors[index], lockBtns[index]);
+    });
 }
 
 function checkContrast(color, text) {
@@ -135,7 +145,7 @@ function updateColorHexOnChange(index) {
     for (icon of icons) checkContrast(color, icon);
 }
 
-function resetSliders() {
+function updateSliders() {
     allSliders.forEach((slider) => {
         const color = initialColors[slider.getAttribute(`data-${slider.name}`)],
             hueValue = chroma(color).hsl()[0].toFixed(2),
@@ -177,5 +187,3 @@ function openAdjustmentPanel(index) {
 function closeAdjustmentPanel(index) {
     sliderContainers[index].classList.remove("active");
 }
-
-generateRandomColors();
